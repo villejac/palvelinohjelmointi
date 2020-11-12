@@ -5,3 +5,4 @@ function tervehdi( nimi ) {
 let nimi = "Ville";
 // KUTSUTAAN FUNKTIOTA
 tervehdi( nimi );
+// TESTI
