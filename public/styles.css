@@ -5,6 +5,7 @@
 body {
     background: url(img/pic1.jpg);
     font-family: sans-serif;
+    color: #fff;
 }
 h1 {
     text-transform: uppercase;

@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 // Ota express käyttöön
 express = require("express");
 const app = express();
+// Määritä staattisten tiedostojen tiedostojen hakemisto
+app.use(express.static("public"));
 // Ota jalkatreenit käyttöön
 const jalkatreenit = require("./jalkatreenit");
 // Luo connectionstringillä vakio
@@ -29,4 +31,4 @@ app.get("/jalkatreenit", function(req, res) {
     })
 });
 // Laitetaan palvelin kuuntelemaan porttia 8080
-const server = app.listen(8080, function(){});
+const server = app.listen(8080 , function(){});
