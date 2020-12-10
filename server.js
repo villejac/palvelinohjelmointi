@@ -7,6 +7,8 @@ const app = express();
 app.use(express.static("public"));
 // Ota jalkatreenit käyttöön
 const jalkatreenit = require("./jalkatreenit");
+// Ota jalkatreenit käyttöön
+const rintatreenit = require("./rintatreenit");
 // Luo connectionstringillä vakio
 const uri = "mongodb+srv://Ville:KoronaKaranteeni@cluster0.fs5ol.mongodb.net/treenit?retryWrites=true&w=majority";
 // Muodostetaan yhteys tietokantaan
@@ -23,6 +25,18 @@ db.once("open", function() {
 app.get("/jalkatreenit", function(req, res) {
     // Hae käyttäjät tietokannasta
     jalkatreenit.find({  }, function(err, result) {
+        if(err) {
+            res.send(err);
+        }else {
+            res.send(result);
+        }
+    })
+});
+
+// Kirjoita get-funktio
+app.get("/rintatreenit", function(req, res) {
+    // Hae käyttäjät tietokannasta
+    rintatreenit.find({  }, function(err, result) {
         if(err) {
             res.send(err);
         }else {
