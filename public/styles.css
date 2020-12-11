@@ -101,11 +101,23 @@ select {
     padding: 10px;
     font-weight: bold;
     line-height: 2.5;
-    font-size: 25px;
+    font-size: 18px;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.267);
     display: none;
   }
 h3 {
   text-shadow: 2px 3px 5px rgba(0,0,0,0.5);
+  font-size: 28px;
+}
+@media only screen and (max-width: 600px) {
+  #printworkout  {
+    width: 300px;
+  }
+  h1 {
+    font-size: 60px;
+  }
+  h4 {
+    font-size: 25px;
+  }
 }

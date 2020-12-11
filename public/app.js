@@ -67,6 +67,13 @@ document.getElementById("slct").onchange = function() {
     // Otsikkoon kirjoitetaan mikä treeni on valittuna
     workoutHeader.innerHTML = "- " + workOut.toUpperCase() + " -";
 
+
+    // Funktio jolla muutetaan liikkeen nimi alkamaan isolla kirjaimella
+    String.prototype.capitalize = function capi() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+     }
+
+
     // Tämä toteutuu kun html:stä on valittuna jalkatreeni
     if(workOut == "Jalkatreeni") {
         
@@ -76,10 +83,11 @@ document.getElementById("slct").onchange = function() {
 
         // Tuodaan treenin otsikko näkyviin
         print.appendChild(workoutHeader);
+
         // Loopataan treeni ja tulostetaan se näkyville
         for (let i = 0; i < jalkaArray.length; i++) {
             for (let j = 0; j < jalkaArray[i].liikkeet.length; j++) {
-            print.innerHTML += jalkaArray[i].liikkeet[j].liike + ": " + jalkaArray[i].liikkeet[j].sarjat + '*' + jalkaArray[i].liikkeet[j].toistot + "<br>";
+            print.innerHTML += jalkaArray[i].liikkeet[j].liike.capitalize() + ": " + jalkaArray[i].liikkeet[j].sarjat + " sarjaa x " + jalkaArray[i].liikkeet[j].toistot + " toistoa" + "<br>";
             }
             }
 
@@ -100,7 +108,7 @@ document.getElementById("slct").onchange = function() {
        // Loopataan treeni ja tulostetaan se näkyville
        for (let i = 0; i < selkaArray.length; i++) {
            for (let j = 0; j < selkaArray[i].liikkeet.length; j++) {
-           print.innerHTML += selkaArray[i].liikkeet[j].liike + ": " + selkaArray[i].liikkeet[j].sarjat + '*' + selkaArray[i].liikkeet[j].toistot + "<br>";
+           print.innerHTML += selkaArray[i].liikkeet[j].liike.capitalize() + ": " + selkaArray[i].liikkeet[j].sarjat + " sarjaa x " + selkaArray[i].liikkeet[j].toistot + " toistoa" + "<br>";
            }
            }
            
@@ -120,7 +128,7 @@ document.getElementById("slct").onchange = function() {
         // Loopataan treeni ja tulostetaan se näkyville
         for (let i = 0; i < rintaArray.length; i++) {
             for (let j = 0; j < rintaArray[i].liikkeet.length; j++) {
-            print.innerHTML += rintaArray[i].liikkeet[j].liike + ": " + rintaArray[i].liikkeet[j].sarjat + '*' + rintaArray[i].liikkeet[j].toistot + "<br>";
+            print.innerHTML += rintaArray[i].liikkeet[j].liike.capitalize() + ": " + rintaArray[i].liikkeet[j].sarjat + " sarjaa x " + rintaArray[i].liikkeet[j].toistot + " toistoa" + "<br>";
             }
             }
         
@@ -140,7 +148,7 @@ document.getElementById("slct").onchange = function() {
        // Loopataan treeni ja tulostetaan se näkyville
        for (let i = 0; i < kasiArray.length; i++) {
            for (let j = 0; j < kasiArray[i].liikkeet.length; j++) {
-           print.innerHTML += kasiArray[i].liikkeet[j].liike + ": " + kasiArray[i].liikkeet[j].sarjat + '*' + kasiArray[i].liikkeet[j].toistot + "<br>";
+           print.innerHTML += kasiArray[i].liikkeet[j].liike.capitalize() + ": " + kasiArray[i].liikkeet[j].sarjat + " sarjaa x " + kasiArray[i].liikkeet[j].toistot + " toistoa" + "<br>";
            }
            }
 
@@ -159,7 +167,7 @@ document.getElementById("slct").onchange = function() {
        // Loopataan treeni ja tulostetaan se näkyville
        for (let i = 0; i < olkaArray.length; i++) {
            for (let j = 0; j < olkaArray[i].liikkeet.length; j++) {
-           print.innerHTML += olkaArray[i].liikkeet[j].liike + ": " + olkaArray[i].liikkeet[j].sarjat + '*' + olkaArray[i].liikkeet[j].toistot + "<br>";
+           print.innerHTML += olkaArray[i].liikkeet[j].liike.capitalize() + ": " + olkaArray[i].liikkeet[j].sarjat + " sarjaa x " + olkaArray[i].liikkeet[j].toistot + " toistoa"  + "<br>";
            }
            }
         
@@ -179,7 +187,7 @@ document.getElementById("slct").onchange = function() {
        // Loopataan treeni ja tulostetaan se näkyville
        for (let i = 0; i < vatsaArray.length; i++) {
            for (let j = 0; j < vatsaArray[i].liikkeet.length; j++) {
-           print.innerHTML += vatsaArray[i].liikkeet[j].liike + ": " + vatsaArray[i].liikkeet[j].sarjat + '*' + vatsaArray[i].liikkeet[j].toistot + "<br>";
+           print.innerHTML += vatsaArray[i].liikkeet[j].liike.capitalize() + ": " + vatsaArray[i].liikkeet[j].sarjat + " sarjaa x " + vatsaArray[i].liikkeet[j].toistot + " toistoa" + "<br>";
            }
            }
            
