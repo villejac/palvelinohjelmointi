@@ -49,6 +49,7 @@ myRequest6.send();
 
 myRequest6.onreadystatechange = function() {
     if ( myRequest6.readyState === 4 && myRequest6.status === 200 ) {
+  
 
 
 // Funktio jolla valitaan treeni

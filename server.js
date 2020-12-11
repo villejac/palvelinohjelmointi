@@ -1,5 +1,7 @@
 // Ota mongoose käyttöön
 const mongoose = require("mongoose");
+// Ota bodyparser käyttöön
+const bodyparser = require("body-parser");
 // Ota express käyttöön
 express = require("express");
 const app = express();
@@ -17,6 +19,7 @@ const kasitreenit = require("./kasitreenit");
 const olkapaatreenit = require("./olkapaatreenit");
 // Ota vatsatreenit käyttöön
 const vatsatreenit = require("./vatsatreenit");
+const tallennetuttreenit = require("./public/tallennetuttreenit");
 // Luo connectionstringillä vakio
 const uri = "mongodb+srv://Ville:KoronaKaranteeni@cluster0.fs5ol.mongodb.net/treenit?retryWrites=true&w=majority";
 // Muodostetaan yhteys tietokantaan
@@ -28,7 +31,11 @@ const db = mongoose.connection;
 db.once("open", function() {
     console.log("Tietokantayhteys avattu");
 });
-
+// Aseta määritykset express-palvelimelle
+// Staattinen hakemisto
+app.use(express.static("public"));
+// Käyät bodyparseria lomakedatan käsittelyssä
+app.use(bodyparser.urlencoded( { extended: false }));
 // Kirjoita get-funktio
 app.get("/jalkatreenit", function(req, res) {
     // Hae käyttäjät tietokannasta
@@ -101,5 +108,16 @@ app.get("/vatsatreenit", function(req, res) {
     })
 });
 
+// Treenin lisäys post-funktio 
+app.post("/tallennetuttreenit", function(req, res) {
+    console.log(req.body);
+    // Varmuuden vuoksi poistetaan _id
+    delete req.body._id;
+    // Lisää collectioniin uusi treeni
+    db.collection("tallennetuttreenit").insertOne(req.body);
+    let outCome = JSON.stringify(req.body);
+    let finalOutcome = JSON.parse(outCome);
+    res.send("Treeni lisätty:" + "<br>" + finalOutcome.liike + ": " + finalOutcome.sarjat+ " sarjaa x " + finalOutcome.toistot + " toistoa" + "<br>" + "Takaisin".link('index.html'));
+});
 // Laitetaan palvelin kuuntelemaan porttia 8080
 const server = app.listen(8080 , function(){});

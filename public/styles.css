@@ -110,6 +110,40 @@ h3 {
   text-shadow: 2px 3px 5px rgba(0,0,0,0.5);
   font-size: 28px;
 }
+#saveworkout {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.5rem;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+h5 {
+  text-align: center;
+  font-size: 40px;
+  padding-top: 60px;
+  margin-bottom: 30px;
+}
+form {
+  text-align: center;
+}
+#toIndex {
+  color: #fff;
+  text-decoration: none;
+  align-items: center;
+  text-align: center;
+  display: inline-block;
+  margin-top: 50px;
+  border: 1px solid white;
+  padding: 5px;
+}
+#toIndex:hover {
+  transform: scale(1.1);
+  
+}
+.container2 {
+  text-align: center;
+}
 @media only screen and (max-width: 600px) {
   #printworkout  {
     width: 300px;
