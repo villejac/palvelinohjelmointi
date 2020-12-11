@@ -117,7 +117,7 @@ app.post("/tallennetuttreenit", function(req, res) {
     db.collection("tallennetuttreenit").insertOne(req.body);
     let outCome = JSON.stringify(req.body);
     let finalOutcome = JSON.parse(outCome);
-    res.send("Treeni lisätty:" + "<br>" + finalOutcome.liike + ": " + finalOutcome.sarjat+ " sarjaa x " + finalOutcome.toistot + " toistoa" + "<br>" + "Takaisin".link('index.html'));
+    res.send("Treeni lisätty:" + "<br>" + finalOutcome.liike + ": " + finalOutcome.sarjat + " sarjaa x " + finalOutcome.toistot + " toistoa" + "<br>" + "Takaisin".link('index.html'));
 });
 // Laitetaan palvelin kuuntelemaan porttia 8080
 const server = app.listen(8080 , function(){});
