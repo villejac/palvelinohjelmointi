@@ -166,3 +166,9 @@ input {
     max-width: 30%;;
   }
 }
+ul {
+  list-style-type: none;
+}
+.deletebutton {
+  margin-left: 15px;;
+}

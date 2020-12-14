@@ -1,3 +1,4 @@
+
 // Ota mongoose käyttöön
 const mongoose = require("mongoose");
 // Ota bodyparser käyttöön
@@ -108,6 +109,18 @@ app.get("/vatsatreenit", function(req, res) {
     })
 });
 
+// Kirjoita get-funktio
+app.get("/tallennetuttreenit", function(req, res) {
+    // Hae käyttäjät tietokannasta
+    tallennetuttreenit.find({  }, function(err, result) {
+        if(err) {
+            res.send(err);
+        }else {
+            res.send(result);
+        }
+    })
+});
+
 // Treenin lisäys post-funktio 
 app.post("/tallennetuttreenit", function(req, res) {
     console.log(req.body);
@@ -119,5 +132,6 @@ app.post("/tallennetuttreenit", function(req, res) {
     let finalOutcome = JSON.parse(outCome);
     res.send("Treeni lisätty:" + "<br>" + finalOutcome.liike + ": " + finalOutcome.sarjat + " sarjaa x " + finalOutcome.toistot + " toistoa" + "<br>" + "Takaisin".link('index.html'));
 });
+
 // Laitetaan palvelin kuuntelemaan porttia 8080
 const server = app.listen(8080 , function(){});

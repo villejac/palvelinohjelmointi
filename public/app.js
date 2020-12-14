@@ -49,6 +49,14 @@ myRequest6.send();
 
 myRequest6.onreadystatechange = function() {
     if ( myRequest6.readyState === 4 && myRequest6.status === 200 ) {
+
+// Haetaan vatsatreenit mongodb:stä
+let myRequest7 = new XMLHttpRequest();
+myRequest7.open("GET", "/tallennetuttreenit", true);
+myRequest7.send();
+
+myRequest7.onreadystatechange = function() {
+    if ( myRequest7.readyState === 4 && myRequest7.status === 200 ) {
   
 
 
@@ -195,6 +203,40 @@ document.getElementById("slct").onchange = function() {
            // Muutetaan treenin tulostuskohta näkyväksi kun treeni valitaan
            print.style.display = "block";
 
+    }   else if(workOut == "Tallennetut liikkeet") {
+
+        let tallennusArray = JSON.parse(myRequest7.response);
+        // Tyhjennetään treenialusta ennen uuden lisäämistä
+        print.innerHTML = "";
+ 
+        // Tuodaan treenin otsikko näkyviin
+        print.appendChild(workoutHeader);
+       // Loopataan treeni ja tulostetaan se näkyville
+
+           // Tehdään lista johon tulostetaan omat treenit ja listan perään nappi jotta voidaan tulostaa poistonappi joka liikkeelle
+           let ul = document.createElement("ul");
+           for (let j = 0; j < tallennusArray.length; j++) {
+               
+            
+            let li = document.createElement("li");
+            let deleteBtn = document.createElement("button");
+            // Annetaan luokka napille, jotta sitä on helpompi muokata css
+            deleteBtn.classList.add("deletebutton");
+            deleteBtn.innerHTML = "x";
+
+            // Tulostetaan listaksi oma treeni
+            li.innerHTML = tallennusArray[j].liike.capitalize() + ": " + tallennusArray[j].sarjat + " sarjaa x " + tallennusArray[j].toistot + " toistoa";
+
+            li.appendChild(deleteBtn);
+            ul.appendChild(li);
+
+            }
+
+            print.appendChild(ul);
+           
+           // Muutetaan treenin tulostuskohta näkyväksi kun treeni valitaan
+           print.style.display = "block";
+
     }else {
         return false;
     }
@@ -208,6 +250,9 @@ document.getElementById("slct").onchange = function() {
 }
 }
 
+
+}
+}
 
 }
 }
