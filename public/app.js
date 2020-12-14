@@ -204,7 +204,7 @@ document.getElementById("slct").onchange = function() {
            print.style.display = "block";
 
     }   else if(workOut == "Tallennetut liikkeet") {
-
+        
         let tallennusArray = JSON.parse(myRequest7.response);
         // Tyhjennetään treenialusta ennen uuden lisäämistä
         print.innerHTML = "";
@@ -217,19 +217,41 @@ document.getElementById("slct").onchange = function() {
            let ul = document.createElement("ul");
            for (let j = 0; j < tallennusArray.length; j++) {
                
-            
+            function createForm(id) {
             let li = document.createElement("li");
-            let deleteBtn = document.createElement("button");
+            let deleteBtn = document.createElement("input");
+            deleteBtn.type = "submit";
+            deleteBtn.value = "poista";
+
+            let input = document.createElement("input");
+            input.value = id;
+            input.type = "hidden";
+            input.name = "_id";
+
+            
+
+            let form = document.createElement("form");
+            form.method = "POST";
+            form.action = "/deleteWorkout"
+
             // Annetaan luokka napille, jotta sitä on helpompi muokata css
             deleteBtn.classList.add("deletebutton");
             deleteBtn.innerHTML = "x";
-
+            
             // Tulostetaan listaksi oma treeni
             li.innerHTML = tallennusArray[j].liike.capitalize() + ": " + tallennusArray[j].sarjat + " sarjaa x " + tallennusArray[j].toistot + " toistoa";
 
+            
+            input.appendChild(form);
+            form.appendChild(li);
             li.appendChild(deleteBtn);
-            ul.appendChild(li);
-
+            ul.appendChild(form);
+            deleteBtn.appendChild(input);
+            return form;
+            }
+            
+            createForm();
+        
             }
 
             print.appendChild(ul);

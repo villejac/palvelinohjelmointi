@@ -1,4 +1,5 @@
-
+// Ota mongodb käyttöön
+const mongodb = require("mongodb");
 // Ota mongoose käyttöön
 const mongoose = require("mongoose");
 // Ota bodyparser käyttöön
@@ -132,6 +133,18 @@ app.post("/tallennetuttreenit", function(req, res) {
     let finalOutcome = JSON.parse(outCome);
     res.send("Treeni lisätty:" + "<br>" + finalOutcome.liike + ": " + finalOutcome.sarjat + " sarjaa x " + finalOutcome.toistot + " toistoa" + "<br>" + "Takaisin".link('index.html'));
 });
+
+// Treenin  poisto post-funktio 
+
+app.post("/deleteWorkout", function(req, res) {
+    console.log(req.body);
+    // Varmuuden vuoksi poistetaan _id
+    delete req.body._id;
+    // Poista collectioniin uusi treeni
+    db.collection("tallennetuttreenit").deleteOne(req.body);
+    res.send("Treeni poistettu" + "<br>" + "Takaisin".link('index.html'));
+});
+
 
 // Laitetaan palvelin kuuntelemaan porttia 8080
 const server = app.listen(8080 , function(){});
