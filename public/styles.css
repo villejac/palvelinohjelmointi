@@ -172,3 +172,10 @@ ul {
 .deletebutton {
   margin-left: 15px;;
 }
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+td {
+  padding: 5px;
+}

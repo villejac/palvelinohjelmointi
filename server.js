@@ -135,16 +135,18 @@ app.post("/tallennetuttreenit", function(req, res) {
 });
 
 // Treenin  poisto post-funktio 
-
 app.post("/deleteWorkout", function(req, res) {
     console.log(req.body);
-    // Varmuuden vuoksi poistetaan _id
-    delete req.body._id;
-    // Poista collectioniin uusi treeni
-    db.collection("tallennetuttreenit").deleteOne(req.body);
-    res.send("Treeni poistettu" + "<br>" + "Takaisin".link('index.html'));
+    // Poista collectionista treeni
+    db.collection("tallennetuttreenit").deleteOne({_id: new mongodb.ObjectID(req.body._id) }, function(err, results) {
+         if  (err) {
+             res.send("Virhe treenin poistossa: " + err);
+         } else {
+            res.send("Treeni " + req.body._id + " poistettu" + "<br>" + "Takaisin".link('index.html'));
+         }
+    });
+    
 });
-
 
 // Laitetaan palvelin kuuntelemaan porttia 8080
 const server = app.listen(8080 , function(){});

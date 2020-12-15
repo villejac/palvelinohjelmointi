@@ -208,54 +208,48 @@ document.getElementById("slct").onchange = function() {
         let tallennusArray = JSON.parse(myRequest7.response);
         // Tyhjennetään treenialusta ennen uuden lisäämistä
         print.innerHTML = "";
- 
+        
         // Tuodaan treenin otsikko näkyviin
         print.appendChild(workoutHeader);
-       // Loopataan treeni ja tulostetaan se näkyville
+        let table = document.createElement("table");
+        for(let i = 0; i < tallennusArray.length; i++) {
+            let newRow = document.createElement("tr");
+            newRow.appendChild(createCell(tallennusArray[i].liike.capitalize() + ": "));
+            newRow.appendChild(createCell(tallennusArray[i].sarjat + " sarjaa"));
+            newRow.appendChild(createCell(tallennusArray[i].toistot + " toistoa"));
+            newRow.appendChild(createForm(tallennusArray[i]._id));
 
-           // Tehdään lista johon tulostetaan omat treenit ja listan perään nappi jotta voidaan tulostaa poistonappi joka liikkeelle
-           let ul = document.createElement("ul");
-           for (let j = 0; j < tallennusArray.length; j++) {
-               
-            function createForm(id) {
-            let li = document.createElement("li");
-            let deleteBtn = document.createElement("input");
-            deleteBtn.type = "submit";
-            deleteBtn.value = "poista";
+            table.appendChild(newRow);
+        }
+        print.appendChild(table);
 
+        function createCell(value) {
+            let newCell = document.createElement("td");
+            newCell.innerHTML = value;
+            return newCell;
+        }
+
+        function createForm(id) {
+            let newCell = document.createElement("td");
+            let form = document.createElement("form");
+            form.method = "POST";
+            // Ternääri operaatio jonka avulla päätetään dormin action
+            form.action = "/deleteWorkout";
+            // Lisää piilokenttä id:lle
             let input = document.createElement("input");
             input.value = id;
             input.type = "hidden";
             input.name = "_id";
+            form.appendChild(input);
+            // Lisää painike
+            input = document.createElement("input");
+            input.type = "submit";
+            input.value = "poista";
+            form.appendChild(input);
+            newCell.appendChild(form);
+            return newCell;
+        }
 
-            
-
-            let form = document.createElement("form");
-            form.method = "POST";
-            form.action = "/deleteWorkout"
-
-            // Annetaan luokka napille, jotta sitä on helpompi muokata css
-            deleteBtn.classList.add("deletebutton");
-            deleteBtn.innerHTML = "x";
-            
-            // Tulostetaan listaksi oma treeni
-            li.innerHTML = tallennusArray[j].liike.capitalize() + ": " + tallennusArray[j].sarjat + " sarjaa x " + tallennusArray[j].toistot + " toistoa";
-
-            
-            input.appendChild(form);
-            form.appendChild(li);
-            li.appendChild(deleteBtn);
-            ul.appendChild(form);
-            deleteBtn.appendChild(input);
-            return form;
-            }
-            
-            createForm();
-        
-            }
-
-            print.appendChild(ul);
-           
            // Muutetaan treenin tulostuskohta näkyväksi kun treeni valitaan
            print.style.display = "block";
 
