@@ -217,7 +217,8 @@ document.getElementById("slct").onchange = function() {
             newRow.appendChild(createCell(tallennusArray[i].liike.capitalize() + ": "));
             newRow.appendChild(createCell(tallennusArray[i].sarjat + " sarjaa"));
             newRow.appendChild(createCell(tallennusArray[i].toistot + " toistoa"));
-            newRow.appendChild(createForm(tallennusArray[i]._id));
+            newRow.appendChild(createForm(tallennusArray[i], "update"));
+            newRow.appendChild(createForm(tallennusArray[i], "delete"));
 
             table.appendChild(newRow);
         }
@@ -229,22 +230,41 @@ document.getElementById("slct").onchange = function() {
             return newCell;
         }
 
-        function createForm(id) {
+        function createForm(tallennetuttreenit, action) {
             let newCell = document.createElement("td");
             let form = document.createElement("form");
-            form.method = "POST";
+            form.method = (action == "delete") ? "POST" : "GET";
             // Ternääri operaatio jonka avulla päätetään dormin action
-            form.action = "/deleteWorkout";
+            form.action = (action == "delete") ? "/deleteWorkout" : "updateWorkout.html";
             // Lisää piilokenttä id:lle
             let input = document.createElement("input");
-            input.value = id;
+            input.value = tallennetuttreenit._id;
             input.type = "hidden";
             input.name = "_id";
+            form.appendChild(input);
+            // Jos update -> lisää lomakkeelle muutkin tiedot
+            // Lisää piilokenttä liikkeelle
+             input = document.createElement("input");
+            input.value = tallennetuttreenit.liike;
+            input.type = "hidden";
+            input.name = "liike";
+            form.appendChild(input);
+            // Lisää piilokenttä sarjoille
+             input = document.createElement("input");
+            input.value = tallennetuttreenit.sarjat;
+            input.type = "hidden";
+            input.name = "sarjat";
+            form.appendChild(input);
+             // Lisää piilokenttä toistoille
+             input = document.createElement("input");
+            input.value = tallennetuttreenit.toistot;
+            input.type = "hidden";
+            input.name = "toistot";
             form.appendChild(input);
             // Lisää painike
             input = document.createElement("input");
             input.type = "submit";
-            input.value = "poista";
+            input.value = (action == "delete") ? "poista" : "päivitä";
             form.appendChild(input);
             newCell.appendChild(form);
             return newCell;

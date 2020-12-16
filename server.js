@@ -148,5 +148,21 @@ app.post("/deleteWorkout", function(req, res) {
     
 });
 
+// Treenin  päivitys post-funktio 
+app.post("/updateWorkout", function(req, res) {
+    console.log(req.body);
+    // Päivitä treeni id:n perusteella
+    db.collection("tallennetuttreenit").updateOne({_id: new mongodb.ObjectID(req.body._id) }, { $set: { liike: req.body.liike, sarjat: req.body.sarjat, toistot: req.body.toistot 
+    }}, function(err, results) {
+         if  (err) {
+             res.send("Virhe treenin päivityksessä: " + err);
+         } else {
+            let outCome = JSON.stringify(req.body);
+            let finalOutcome = JSON.parse(outCome);
+            res.send("Treeni " + req.body._id + "<br>" + finalOutcome.liike + ": " + finalOutcome.sarjat + " sarjaa x " + finalOutcome.toistot + " toistoa" + " päivitetty" + "<br>" + "Takaisin".link('index.html'));
+         }
+    });
+    
+});
 // Laitetaan palvelin kuuntelemaan porttia 8080
 const server = app.listen(8080 , function(){});
