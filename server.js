@@ -166,4 +166,4 @@ app.post("/updateWorkout", function(req, res) {
     
 });
 // Laitetaan palvelin kuuntelemaan porttia 8080
-const server = app.listen(8080 , function(){});
+const server = app.listen(process.env.PORT || 8080 , function(){});
