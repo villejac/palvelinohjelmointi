@@ -27,6 +27,7 @@ const uri = "mongodb+srv://Ville:KoronaKaranteeni@cluster0.fs5ol.mongodb.net/tre
 // Muodostetaan yhteys tietokantaan
 mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true });
 
+
 // Luodaan vakio tietokantayhteydelle
 const db = mongoose.connection;
 // Näytä ilmoitus jos yhteys ok
